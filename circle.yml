@@ -1,0 +1,6 @@
+deployment:
+  staging:
+    owner: bouzuya
+    branch: master
+    heroku:
+      appname: hspd-plus

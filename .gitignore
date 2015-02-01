@@ -1,0 +1,7 @@
+.tmp
+*.log
+bower_components
+coverage
+dist
+node_modules
+typings

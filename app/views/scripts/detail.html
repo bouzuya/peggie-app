@@ -1,0 +1,32 @@
+<div
+  class="script-detail"
+  ng-controller="DetailController as c"
+  >
+  <div class="script" ng-if="c.script">
+    <div class="image-container">
+      <div class="image">
+        <img ng-src="{{c.script.image}}" />
+      </div>
+    </div>
+    <div class="number-container">
+      <div class="number">
+        <p>
+          <a ng-href="http://blog.bouzuya.net/{{c.script.date | date : 'yyyy/MM/dd'}}/">
+            <span class="number-prefix">day </span>
+            <span ng-bind="c.script.number">N</span>
+            <span class="number-suffix">.</span>
+          </a>
+        </p>
+      </div>
+    </div>
+    <div class="repo-container">
+      <div class="repo">
+        <p>
+          <a ng-title="{{c.script.name}}" ng-href="{{c.script.repository}}" ng-class="{deprecated: c.script.deprecated}">
+            <span class="repo-prefix">bouzuya/</span><span ng-bind="c.script.name">hubot-XXX</span>
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

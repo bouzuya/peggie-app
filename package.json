@@ -1,0 +1,62 @@
+{
+  "name": "hspd-plus",
+  "description": "A client for the hspd: hubot script per day",
+  "version": "1.0.0",
+  "author": {
+    "name": "bouzuya",
+    "mail": "m@bouzuya.net",
+    "url": "http://bouzuya.net"
+  },
+  "bugs": {
+    "url": "https://github.com/bouzuya/hspd-plus/issues"
+  },
+  "dependencies": {
+    "express": "^4.10.7"
+  },
+  "devDependencies": {
+    "bower": "^1.3.12",
+    "browser-sync": "^1.8.3",
+    "coffee-script": "^1.8.0",
+    "del": "^1.1.1",
+    "gulp": "^3.8.10",
+    "gulp-espower": "^0.10.0",
+    "gulp-karma": "0.0.4",
+    "gulp-less": "^2.0.1",
+    "gulp-rev": "^2.0.1",
+    "gulp-sourcemaps": "^1.3.0",
+    "gulp-typescript": "^2.3.0",
+    "gulp-usemin": "^0.3.8",
+    "gulp-util": "^3.0.1",
+    "gulp-webpack": "^1.1.2",
+    "karma-mocha": "^0.1.10",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-webpack": "^1.5.0",
+    "merge-stream": "^0.1.6",
+    "power-assert": "^0.10.0",
+    "run-sequence": "^1.0.2",
+    "tsd": "^0.5.7"
+  },
+  "homepage": "https://github.com/bouzuya/hspd-plus",
+  "keywords": [
+    "hspd",
+    "hubot",
+    "hubot-script",
+    "hubot-script-per-day"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bouzuya/hspd-plus"
+  },
+  "scripts": {
+    "clean": "gulp clean",
+    "prestart": "bower install && tsd reinstall && gulp build",
+    "start": "node server.js",
+    "test": "gulp test",
+    "watch": "gulp watch"
+  },
+  "engines": {
+    "node": "0.10.x"
+  }
+}

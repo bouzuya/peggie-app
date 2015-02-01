@@ -1,0 +1,19 @@
+{
+  "name": "hspd plus",
+  "description": "A client for the hspd: hubot script per day",
+  "keywords": [
+    "bouzuya",
+    "hspd",
+    "hubot-scripts",
+    "hubot"
+  ],
+  "website": "https://github.com/bouzuya/hspd-plus",
+  "repository": "https://github.com/bouzuya/hspd-plus",
+  "env": {
+    "NPM_CONFIG_PRODUCTION": {
+      "description": "always false",
+      "value": "false"
+    }
+  },
+  "addons": []
+}
