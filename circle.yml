@@ -3,4 +3,4 @@ deployment:
     owner: bouzuya
     branch: master
     heroku:
-      appname: peggie-app
+      appname: peggie
