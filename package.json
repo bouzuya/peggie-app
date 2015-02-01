@@ -1,6 +1,6 @@
 {
-  "name": "hspd-plus",
-  "description": "A client for the hspd: hubot script per day",
+  "name": "peggie-app",
+  "description": "A peggie client",
   "version": "1.0.0",
   "author": {
     "name": "bouzuya",
@@ -8,7 +8,7 @@
     "url": "http://bouzuya.net"
   },
   "bugs": {
-    "url": "https://github.com/bouzuya/hspd-plus/issues"
+    "url": "https://github.com/bouzuya/peggie-app/issues"
   },
   "dependencies": {
     "express": "^4.10.7"
@@ -36,18 +36,15 @@
     "run-sequence": "^1.0.2",
     "tsd": "^0.5.7"
   },
-  "homepage": "https://github.com/bouzuya/hspd-plus",
+  "homepage": "https://github.com/bouzuya/peggie-app",
   "keywords": [
-    "hspd",
-    "hubot",
-    "hubot-script",
-    "hubot-script-per-day"
+    "peggie"
   ],
   "license": "MIT",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bouzuya/hspd-plus"
+    "url": "https://github.com/bouzuya/peggie-app"
   },
   "scripts": {
     "clean": "gulp clean",

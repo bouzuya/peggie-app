@@ -1,11 +1,11 @@
 {
-  "name": "hspd-plus",
+  "name": "peggie-app",
   "version": "0.0.0",
-  "homepage": "https://github.com/bouzuya/hspd-plus",
+  "homepage": "https://github.com/bouzuya/peggie-plus",
   "authors": [
     "bouzuya <m@bouzuya.net>"
   ],
-  "description": "A client for the hspd: hubot script per day",
+  "description": "A peggie client",
   "license": "MIT",
   "private": true,
   "ignore": [

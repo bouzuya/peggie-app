@@ -1,10 +1,10 @@
-# hspd-plus
+# peggie-app
 
-A client for the hspd: hubot script per day.
+A peggie client
 
-This product is one of [the bouzuya's shuburi][shuburi]. The product was released in 2015-W05.
+This product is [shuburi][] in 2015-W06.
 
-Demo: [hspd-plus.herokuapp.com](https://hspd-plus.herokuapp.com/)
+Demo: [peggie-app.herokuapp.com](https://peggie-app.herokuapp.com/)
 
 # Development
 
@@ -30,7 +30,7 @@ See `npm run`.
 [bouzuya]: https://github.com/bouzuya/
 [email]: mailto:m@bouzuya.net
 [url]: http://bouzuya.net
-[circle-ci]: https://circleci.com/gh/bouzuya/hspd-plus
-[circle-ci-badge]: https://circleci.com/gh/bouzuya/hspd-plus.svg?style=svg
+[circle-ci]: https://circleci.com/gh/bouzuya/peggie-app
+[circle-ci-badge]: https://circleci.com/gh/bouzuya/peggie-app.svg?style=svg
 [heroku-button]: https://www.herokucdn.com/deploy/button.png
 [heroku-deploy]: https://heroku.com/deploy

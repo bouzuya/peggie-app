@@ -1,14 +1,12 @@
 {
-  "name": "hspd plus",
-  "description": "A client for the hspd: hubot script per day",
+  "name": "peggie app",
+  "description": "A peggie client",
   "keywords": [
     "bouzuya",
-    "hspd",
-    "hubot-scripts",
-    "hubot"
+    "peggie"
   ],
-  "website": "https://github.com/bouzuya/hspd-plus",
-  "repository": "https://github.com/bouzuya/hspd-plus",
+  "website": "https://github.com/bouzuya/peggie-app",
+  "repository": "https://github.com/bouzuya/peggie-app",
   "env": {
     "NPM_CONFIG_PRODUCTION": {
       "description": "always false",
