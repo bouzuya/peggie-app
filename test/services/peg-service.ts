@@ -9,7 +9,39 @@ describe('PegService', function() {
     this.data1 = { peg: true, date: '2015-01-10', value: 1000 };
     this.data2 = { peg: true, date: '2015-01-05', value: 500 };
     this.data3 = { peg: true, date: '2015-01-05', value: 100 };
+    this.data4 = { peg: true, date: '2015-01-02', value: 250 };
     this.service = new PegService();
+  });
+
+  describe('#remove', function() {
+    beforeEach(function() {
+      this.service.add(this.data1);
+      this.service.add(this.data2);
+      this.service.add(this.data3);
+    });
+
+    context('when item exists', function() {
+      beforeEach(function() {
+        this.length = this.service.toArray().length;
+        this.service.remove(this.data1);
+      });
+
+      it('works', function() {
+        assert(this.service.toArray().length === this.length - 1);
+        assert(this.service.toArray().indexOf(this.data1) === -1);
+      });
+    });
+
+    context('when item does not exist', function() {
+      beforeEach(function() {
+        this.length = this.service.toArray().length;
+        this.service.remove(this.data4);
+      });
+
+      it('does nothing', function() {
+        assert(this.service.toArray().length === this.length);
+      });
+    });
   });
 
   describe('#toArray', function() {
