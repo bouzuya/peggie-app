@@ -8,11 +8,13 @@ describe('Item', function() {
   describe('#constructor', function() {
     beforeEach(function() {
       this.date = '2015-01-01';
-      this.item = new Item({ date: this.date });
+      this.peg = true;
+      this.item = new Item({ date: this.date, peg: this.peg });
     });
 
     it('works', function() {
       assert(this.item.date === this.date);
+      assert(this.item.peg === this.peg);
     });
   });
 });
