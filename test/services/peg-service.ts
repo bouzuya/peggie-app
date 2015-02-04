@@ -6,38 +6,38 @@ import PegService = require('../../app/scripts/services/peg-service');
 
 describe('PegService', function() {
   beforeEach(function() {
-    this.data1 = { peg: true, date: '2015-01-10', value: 1000 };
-    this.data2 = { peg: true, date: '2015-01-05', value: 500 };
-    this.data3 = { peg: true, date: '2015-01-05', value: 100 };
-    this.data4 = { peg: true, date: '2015-01-02', value: 250 };
-    this.data5 = { peg: false, date: '2015-01-07', value: 200 };
-    this.data6 = { peg: false, date: '2015-01-03', value: 110 };
+    this.p1 = { peg: true, date: '2015-01-10', value: 1000 };
+    this.p2 = { peg: true, date: '2015-01-05', value: 500 };
+    this.p3 = { peg: true, date: '2015-01-05', value: 100 };
+    this.p4 = { peg: true, date: '2015-01-02', value: 250 };
+    this.i5 = { peg: false, date: '2015-01-07', value: 200 };
+    this.i6 = { peg: false, date: '2015-01-03', value: 110 };
     this.service = new PegService();
   });
 
   describe('#remove', function() {
     beforeEach(function() {
-      this.service.add(this.data1);
-      this.service.add(this.data2);
-      this.service.add(this.data3);
+      this.service.add(this.p1);
+      this.service.add(this.p2);
+      this.service.add(this.p3);
     });
 
     context('when item exists', function() {
       beforeEach(function() {
         this.length = this.service.getPegs().length;
-        this.service.remove(this.data1);
+        this.service.remove(this.p1);
       });
 
       it('works', function() {
         assert(this.service.getPegs().length === this.length - 1);
-        assert(this.service.getPegs().indexOf(this.data1) === -1);
+        assert(this.service.getPegs().indexOf(this.p1) === -1);
       });
     });
 
     context('when item does not exist', function() {
       beforeEach(function() {
         this.length = this.service.getPegs().length;
-        this.service.remove(this.data4);
+        this.service.remove(this.p4);
       });
 
       it('does nothing', function() {
@@ -47,14 +47,14 @@ describe('PegService', function() {
   });
 
   describe('#getItems', function() {
-    context('when [data1]', function() {
+    context('when [p1]', function() {
       beforeEach(function() {
-        this.service.add(this.data1);
+        this.service.add(this.p1);
       });
 
-      context('with data1', function() {
+      context('with p1', function() {
         beforeEach(function() {
-          this.item = this.data1;
+          this.item = this.p1;
         });
 
         it('returns []', function() {
@@ -63,64 +63,64 @@ describe('PegService', function() {
       });
     });
 
-    context('when [data1, data5]', function() {
+    context('when [p1, i5]', function() {
       beforeEach(function() {
-        this.service.add(this.data1);
-        this.service.add(this.data5);
+        this.service.add(this.p1);
+        this.service.add(this.i5);
       });
 
-      context('with data1', function() {
+      context('with p1', function() {
         beforeEach(function() {
-          this.item = this.data1;
+          this.item = this.p1;
         });
 
-        it('returns [data5]', function() {
-          assert.deepEqual(this.service.getItems(this.item), [this.data5]);
+        it('returns [i5]', function() {
+          assert.deepEqual(this.service.getItems(this.item), [this.i5]);
         });
       });
     });
 
-    context('when [data1, data5, data5]', function() {
+    context('when [p1, i5, i5]', function() {
       beforeEach(function() {
-        this.service.add(this.data1);
-        this.service.add(this.data5);
-        this.service.add(this.data5);
+        this.service.add(this.p1);
+        this.service.add(this.i5);
+        this.service.add(this.i5);
       });
 
-      context('with data1', function() {
+      context('with p1', function() {
         beforeEach(function() {
-          this.item = this.data1;
+          this.item = this.p1;
         });
 
-        it('returns [data5, data5]', function() {
+        it('returns [i5, i5]', function() {
           assert.deepEqual(this.service.getItems(this.item), [
-            this.data5, this.data5
+            this.i5, this.i5
           ]);
         });
       });
     });
 
-    context('when [data1, data5, data2, data6]', function() {
+    context('when [p1, i5, p2, i6]', function() {
       beforeEach(function() {
-        this.service.add(this.data1);
-        this.service.add(this.data5);
-        this.service.add(this.data2);
-        this.service.add(this.data6);
+        this.service.add(this.p1);
+        this.service.add(this.i5);
+        this.service.add(this.p2);
+        this.service.add(this.i6);
       });
 
-      context('with data1', function() {
-        beforeEach(function() { this.item = this.data1; });
+      context('with p1', function() {
+        beforeEach(function() { this.item = this.p1; });
 
-        it('returns [data5]', function() {
-          assert.deepEqual(this.service.getItems(this.item), [this.data5]);
+        it('returns [i5]', function() {
+          assert.deepEqual(this.service.getItems(this.item), [this.i5]);
         });
       });
 
-      context('with data2', function() {
-        beforeEach(function() { this.item = this.data2; });
+      context('with p2', function() {
+        beforeEach(function() { this.item = this.p2; });
 
-        it('returns [data6]', function() {
-          assert.deepEqual(this.service.getItems(this.item), [this.data6]);
+        it('returns [i6]', function() {
+          assert.deepEqual(this.service.getItems(this.item), [this.i6]);
         });
       });
     });
@@ -133,37 +133,38 @@ describe('PegService', function() {
       });
     });
 
-    context('when [data1]', function() {
+    context('when [p1]', function() {
       beforeEach(function() {
-        this.service.add(this.data1);
+        this.service.add(this.p1);
       });
 
-      it('returns [data1]', function() {
-        assert.deepEqual(this.service.getPegs(), [this.data1]);
+      it('returns [p1]', function() {
+        assert.deepEqual(this.service.getPegs(), [this.p1]);
       });
     });
 
-    context('when [data1, data2]', function() {
+    context('when [p1, p2]', function() {
       beforeEach(function() {
-        this.service.add(this.data1);
-        this.service.add(this.data2);
+        this.service.add(this.p1);
+        this.service.add(this.p2);
       });
 
-      it('returns [data1, data2]', function() {
-        assert.deepEqual(this.service.getPegs(), [this.data1, this.data2]);
+      it('returns [p1, p2]', function() {
+        assert.deepEqual(this.service.getPegs(), [this.p1, this.p2]);
       });
     });
 
-    context('when [data1, data2, data3]', function() {
+    context('when [p1, p2, p3]', function() {
       beforeEach(function() {
-        this.service.add(this.data1);
-        this.service.add(this.data2);
-        this.service.add(this.data3);
+        this.service.add(this.p1);
+        this.service.add(this.p2);
+        this.service.add(this.p3);
       });
 
-      it('returns [data1, data3, data2]', function() {
+      it('returns [p1, p3, p2]', function() {
         assert.deepEqual(this.service.getPegs(), [
-          this.data1, this.data3, this.data2]);
+          this.p1, this.p3, this.p2
+        ]);
       });
     });
   });
