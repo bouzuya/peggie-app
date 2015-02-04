@@ -6,12 +6,12 @@ import PegService = require('../../app/scripts/services/peg-service');
 
 describe('PegService', function() {
   beforeEach(function() {
-    this.p1 = { peg: true, date: '2015-01-10', value: 1000 };
-    this.p2 = { peg: true, date: '2015-01-05', value: 500 };
-    this.p3 = { peg: true, date: '2015-01-05', value: 100 };
-    this.p4 = { peg: true, date: '2015-01-02', value: 250 };
-    this.i1 = { peg: false, date: '2015-01-07', value: 200 };
-    this.i2 = { peg: false, date: '2015-01-03', value: 110 };
+    this.p1 = { peg: true, date: '2015-01-01', value: 9000 };
+    this.p2 = { peg: true, date: '2015-01-02', value: 8000 };
+    this.p3 = { peg: true, date: '2015-01-03', value: 7000 };
+    this.p4 = { peg: true, date: '2015-01-04', value: 6000 };
+    this.i1 = { peg: false, date: '2015-01-01', value: 100 };
+    this.i2 = { peg: false, date: '2015-01-02', value: 200 };
     this.service = new PegService();
   });
 
@@ -48,14 +48,10 @@ describe('PegService', function() {
 
   describe('#getItems', function() {
     context('when [p1]', function() {
-      beforeEach(function() {
-        this.service.add(this.p1);
-      });
+      beforeEach(function() { this.service.add(this.p1); });
 
       context('with p1', function() {
-        beforeEach(function() {
-          this.item = this.p1;
-        });
+        beforeEach(function() { this.item = this.p1; });
 
         it('returns []', function() {
           assert.deepEqual(this.service.getItems(this.item), []);
@@ -70,9 +66,7 @@ describe('PegService', function() {
       });
 
       context('with p1', function() {
-        beforeEach(function() {
-          this.item = this.p1;
-        });
+        beforeEach(function() { this.item = this.p1; });
 
         it('returns [i1]', function() {
           assert.deepEqual(this.service.getItems(this.item), [this.i1]);
@@ -88,9 +82,7 @@ describe('PegService', function() {
       });
 
       context('with p1', function() {
-        beforeEach(function() {
-          this.item = this.p1;
-        });
+        beforeEach(function() { this.item = this.p1; });
 
         it('returns [i1, i1]', function() {
           assert.deepEqual(this.service.getItems(this.item), [
@@ -100,11 +92,11 @@ describe('PegService', function() {
       });
     });
 
-    context('when [p1, i1, p2, i2]', function() {
+    context('when [p1, p2, i1, i2]', function() {
       beforeEach(function() {
         this.service.add(this.p1);
-        this.service.add(this.i1);
         this.service.add(this.p2);
+        this.service.add(this.i1);
         this.service.add(this.i2);
       });
 
@@ -112,7 +104,9 @@ describe('PegService', function() {
         beforeEach(function() { this.item = this.p1; });
 
         it('returns [i1]', function() {
-          assert.deepEqual(this.service.getItems(this.item), [this.i1]);
+          assert.deepEqual(this.service.getItems(this.item), [
+            this.i1, this.i2
+          ]);
         });
       });
 
@@ -134,9 +128,7 @@ describe('PegService', function() {
     });
 
     context('when [p1]', function() {
-      beforeEach(function() {
-        this.service.add(this.p1);
-      });
+      beforeEach(function() { this.service.add(this.p1); });
 
       it('returns [p1]', function() {
         assert.deepEqual(this.service.getPegs(), [this.p1]);
@@ -145,8 +137,8 @@ describe('PegService', function() {
 
     context('when [p1, p2]', function() {
       beforeEach(function() {
-        this.service.add(this.p1);
         this.service.add(this.p2);
+        this.service.add(this.p1);
       });
 
       it('returns [p1, p2]', function() {
@@ -156,14 +148,14 @@ describe('PegService', function() {
 
     context('when [p1, p2, p3]', function() {
       beforeEach(function() {
+        this.service.add(this.p3);
         this.service.add(this.p1);
         this.service.add(this.p2);
-        this.service.add(this.p3);
       });
 
-      it('returns [p1, p3, p2]', function() {
+      it('returns [p1, p2, p3]', function() {
         assert.deepEqual(this.service.getPegs(), [
-          this.p1, this.p3, this.p2
+          this.p1, this.p2, this.p3
         ]);
       });
     });
