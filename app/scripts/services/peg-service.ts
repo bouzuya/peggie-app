@@ -28,7 +28,7 @@ class PegService {
     }, { end: false, items: [] }).items;
   }
 
-  toArray(): Array<Item> {
+  getPegs(): Array<Item> {
     return this._items;
   }
 }

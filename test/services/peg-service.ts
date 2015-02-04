@@ -24,24 +24,24 @@ describe('PegService', function() {
 
     context('when item exists', function() {
       beforeEach(function() {
-        this.length = this.service.toArray().length;
+        this.length = this.service.getPegs().length;
         this.service.remove(this.data1);
       });
 
       it('works', function() {
-        assert(this.service.toArray().length === this.length - 1);
-        assert(this.service.toArray().indexOf(this.data1) === -1);
+        assert(this.service.getPegs().length === this.length - 1);
+        assert(this.service.getPegs().indexOf(this.data1) === -1);
       });
     });
 
     context('when item does not exist', function() {
       beforeEach(function() {
-        this.length = this.service.toArray().length;
+        this.length = this.service.getPegs().length;
         this.service.remove(this.data4);
       });
 
       it('does nothing', function() {
-        assert(this.service.toArray().length === this.length);
+        assert(this.service.getPegs().length === this.length);
       });
     });
   });
@@ -126,10 +126,10 @@ describe('PegService', function() {
     });
   });
 
-  describe('#toArray', function() {
+  describe('#getPegs', function() {
     context('when empty', function() {
       it('returns []', function() {
-        assert.deepEqual(this.service.toArray(), []);
+        assert.deepEqual(this.service.getPegs(), []);
       });
     });
 
@@ -139,7 +139,7 @@ describe('PegService', function() {
       });
 
       it('returns [data1]', function() {
-        assert.deepEqual(this.service.toArray(), [this.data1]);
+        assert.deepEqual(this.service.getPegs(), [this.data1]);
       });
     });
 
@@ -150,7 +150,7 @@ describe('PegService', function() {
       });
 
       it('returns [data1, data2]', function() {
-        assert.deepEqual(this.service.toArray(), [this.data1, this.data2]);
+        assert.deepEqual(this.service.getPegs(), [this.data1, this.data2]);
       });
     });
 
@@ -162,7 +162,7 @@ describe('PegService', function() {
       });
 
       it('returns [data1, data3, data2]', function() {
-        assert.deepEqual(this.service.toArray(), [
+        assert.deepEqual(this.service.getPegs(), [
           this.data1, this.data3, this.data2]);
       });
     });
