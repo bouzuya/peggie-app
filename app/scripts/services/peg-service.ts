@@ -18,6 +18,16 @@ class PegService {
     this._items.splice(index, 1);
   }
 
+  getItems(item: Item): Array<Item> {
+    var index = this._items.indexOf(item);
+    if (index === -1) return [];
+    return this._items.filter((_, i) => i > index).reduce((r, i) => {
+      if (r.end) return r;
+      if (i.peg) return { end: true, items: r.items };
+      return { end: false, items: r.items.concat(i) };
+    }, { end: false, items: [] }).items;
+  }
+
   toArray(): Array<Item> {
     return this._items;
   }
