@@ -10,8 +10,8 @@ describe('PegService', function() {
     this.p2 = { peg: true, date: '2015-01-05', value: 500 };
     this.p3 = { peg: true, date: '2015-01-05', value: 100 };
     this.p4 = { peg: true, date: '2015-01-02', value: 250 };
-    this.i5 = { peg: false, date: '2015-01-07', value: 200 };
-    this.i6 = { peg: false, date: '2015-01-03', value: 110 };
+    this.i1 = { peg: false, date: '2015-01-07', value: 200 };
+    this.i2 = { peg: false, date: '2015-01-03', value: 110 };
     this.service = new PegService();
   });
 
@@ -63,10 +63,10 @@ describe('PegService', function() {
       });
     });
 
-    context('when [p1, i5]', function() {
+    context('when [p1, i1]', function() {
       beforeEach(function() {
         this.service.add(this.p1);
-        this.service.add(this.i5);
+        this.service.add(this.i1);
       });
 
       context('with p1', function() {
@@ -74,17 +74,17 @@ describe('PegService', function() {
           this.item = this.p1;
         });
 
-        it('returns [i5]', function() {
-          assert.deepEqual(this.service.getItems(this.item), [this.i5]);
+        it('returns [i1]', function() {
+          assert.deepEqual(this.service.getItems(this.item), [this.i1]);
         });
       });
     });
 
-    context('when [p1, i5, i5]', function() {
+    context('when [p1, i1, i1]', function() {
       beforeEach(function() {
         this.service.add(this.p1);
-        this.service.add(this.i5);
-        this.service.add(this.i5);
+        this.service.add(this.i1);
+        this.service.add(this.i1);
       });
 
       context('with p1', function() {
@@ -92,35 +92,35 @@ describe('PegService', function() {
           this.item = this.p1;
         });
 
-        it('returns [i5, i5]', function() {
+        it('returns [i1, i1]', function() {
           assert.deepEqual(this.service.getItems(this.item), [
-            this.i5, this.i5
+            this.i1, this.i1
           ]);
         });
       });
     });
 
-    context('when [p1, i5, p2, i6]', function() {
+    context('when [p1, i1, p2, i2]', function() {
       beforeEach(function() {
         this.service.add(this.p1);
-        this.service.add(this.i5);
+        this.service.add(this.i1);
         this.service.add(this.p2);
-        this.service.add(this.i6);
+        this.service.add(this.i2);
       });
 
       context('with p1', function() {
         beforeEach(function() { this.item = this.p1; });
 
-        it('returns [i5]', function() {
-          assert.deepEqual(this.service.getItems(this.item), [this.i5]);
+        it('returns [i1]', function() {
+          assert.deepEqual(this.service.getItems(this.item), [this.i1]);
         });
       });
 
       context('with p2', function() {
         beforeEach(function() { this.item = this.p2; });
 
-        it('returns [i6]', function() {
-          assert.deepEqual(this.service.getItems(this.item), [this.i6]);
+        it('returns [i2]', function() {
+          assert.deepEqual(this.service.getItems(this.item), [this.i2]);
         });
       });
     });
