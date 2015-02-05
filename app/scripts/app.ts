@@ -3,12 +3,14 @@
 import AppController = require('./controllers/app-controller');
 import DetailController = require('./controllers/detail-controller');
 import HubotScriptService = require('./services/hubot-script-service');
+import PegStoreService = require('./services/peg-store-service');
 
 angular
 .module('app', [
   'ui.router'
 ])
 .service('HubotScriptService', HubotScriptService)
+.service('PegStoreService', PegStoreService)
 .controller('AppController', AppController)
 .controller('DetailController', DetailController)
 .config([
