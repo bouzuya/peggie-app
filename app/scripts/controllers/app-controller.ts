@@ -5,7 +5,7 @@ class AppController {
   static $inject = [];
 
   pegs: Array<{}>;
-  peg: {};
+  peg: { index: string; };
 
   constructor() {
     this.pegs = [
@@ -23,7 +23,7 @@ class AppController {
   }
 
   _resetPeg(): void {
-    this.peg = { index: 0, date: moment().format('YYYY-MM-DD'), value: 0 };
+    this.peg = { index: '0', date: moment().format('YYYY-MM-DD'), value: '0' };
   }
 }
 
