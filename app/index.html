@@ -24,6 +24,12 @@
       <!-- content module -->
       <div class="content-container">
         <div class="content">
+          <ul>
+            <li ng-repeat="i in c.pegs">
+              <span class="date" ng-bind="i.date"></span>
+              <span class="value" ng-bind="i.value"></span>
+            </li>
+          </ul>
         </div>
       </div>
 
