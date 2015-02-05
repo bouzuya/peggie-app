@@ -4,11 +4,13 @@ import AppController = require('./controllers/app-controller');
 import DetailController = require('./controllers/detail-controller');
 import HubotScriptService = require('./services/hubot-script-service');
 import PegStoreService = require('./services/peg-store-service');
+import PgPeg = require('./directives/pg-peg');
 
 angular
 .module('app', [
   'ui.router'
 ])
+.directive('pgPeg', () => new PgPeg())
 .service('HubotScriptService', HubotScriptService)
 .service('PegStoreService', PegStoreService)
 .controller('AppController', AppController)
