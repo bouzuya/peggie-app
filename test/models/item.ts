@@ -9,12 +9,18 @@ describe('Item', function() {
     beforeEach(function() {
       this.date = '2015-01-01';
       this.peg = true;
-      this.item = new Item({ date: this.date, peg: this.peg });
+      this.value = 1000;
+      this.item = new Item({
+        date: this.date,
+        peg: this.peg,
+        value: this.value
+      });
     });
 
     it('works', function() {
       assert(this.item.date === this.date);
       assert(this.item.peg === this.peg);
+      assert(this.item.value === this.value);
     });
   });
 });
