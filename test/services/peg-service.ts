@@ -159,5 +159,19 @@ describe('PegService', function() {
         ]);
       });
     });
+
+    context('when [p1, i1, p3]', function() {
+      beforeEach(function() {
+        this.service.add(this.p3);
+        this.service.add(this.p1);
+        this.service.add(this.i1);
+      });
+
+      it('returns [p1, p3]', function() {
+        assert.deepEqual(this.service.getPegs(), [
+          this.p1, this.p3
+        ]);
+      });
+    });
   });
 });

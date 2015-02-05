@@ -27,7 +27,7 @@ class PegService {
   }
 
   getPegs(): Array<Item> {
-    return this._items;
+    return this._items.filter((i) => i.peg);
   }
 }
 
