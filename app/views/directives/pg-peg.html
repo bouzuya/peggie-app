@@ -1,5 +1,7 @@
 <div class="peg">
   <span class="peg" ng-bind="model.peg"></span>
   <span class="date" ng-bind="model.date"></span>
-  <span class="value" ng-bind="model.value"></span>
+  <span class="value" ng-bind="model.value" ng-if="!model.peg"></span>
+  <span class="total" ng-bind="model.value" ng-if="model.peg"></span>
+  <span class="unknown" ng-bind="model.unknown" ng-if="model.peg"></span>
 </div>
