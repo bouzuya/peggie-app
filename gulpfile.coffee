@@ -84,7 +84,7 @@ gulp.task 'karma', (done) ->
 gulp.task 'less', ->
   less = require 'gulp-less'
   gulp
-    .src paths.appDir + '/styles/*.less'
+    .src paths.appDir + '/styles/**/*.less'
     .pipe less()
     .on 'error', (e) ->
       gutil.log e
@@ -160,7 +160,7 @@ gulp.task 'watch', ['build'], ->
     paths.appFiles
     paths.appViewFiles
     paths.testFiles
-    paths.appDir + '/styles/*.less'
+    paths.appDir + '/styles/**/*.less'
     paths.appDir + '/index.html'
   ], ['test-and-build']
   browserSync
