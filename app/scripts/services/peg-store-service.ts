@@ -1,15 +1,18 @@
 class PegStoreService {
-  pegs: Array<{ date: string; peg: boolean; value: number }>;
+  pegs: Array<{ date: string; note: string; peg: boolean; value: number }>;
 
   constructor() {
     this.pegs = [
-      { peg: true, date: '2015-01-03', value: 3000, unknown: 5000 },
-      { peg: false, date: '2015-01-02', value: 2000 },
-      { peg: true, date: '2015-01-01', value: 10000, unknown: 0 }
+      { peg: false, date: '2015-01-09', value: 750, note: 'カレー' },
+      { peg: false, date: '2015-01-07', value: 800, note: 'きつねうどんていしょく' },
+      { peg: false, date: '2015-01-06', value: 700, note: 'ぎょうざていしょく' },
+      { peg: true, date: '2015-01-05', value: 3500, unknown: 5000, note: null },
+      { peg: false, date: '2015-01-02', value: 1500, note: 'はつもうで' },
+      { peg: true, date: '2015-01-01', value: 10000, unknown: 0, note: 'おとしだま直後' }
     ];
   }
 
-  insert(index: number, peg: { date: string; peg: boolean; value: number }): void {
+  insert(index: number, peg: { date: string; note: string; peg: boolean; value: number }): void {
     var sum = (array: Array<{ value: number }>): number => {
       return array.reduce(((r, i) => r + i.value), 0);
     };
@@ -27,8 +30,9 @@ class PegStoreService {
         var prevItems = beforeItems;
         var prevUnknown = peg.value - sum(prevItems) - prev.value;
         this.pegs.splice(prevIndex, 1, {
-          peg: prev.peg,
           date: prev.date,
+          note: prev.note,
+          peg: prev.peg,
           unknown: prevUnknown,
           value: prev.value
         });
@@ -36,8 +40,9 @@ class PegStoreService {
       var nextValue = nextIndex >= 0 ? this.pegs[nextIndex].value : 0;
       var unknown = nextIndex >= 0 ? nextValue - sum(afterItems) - peg.value : 0;
       this.pegs.splice(index, 0, {
-        peg: peg.peg,
         date: peg.date,
+        note: peg.note,
+        peg: peg.peg,
         unknown: unknown,
         value: peg.value
       });
@@ -48,8 +53,9 @@ class PegStoreService {
         var nextValue = nextIndex >= 0 ? this.pegs[nextIndex].value : 0;
         var prevUnknown = nextValue - sum(prevItems) - peg.value - prev.value;
         this.pegs.splice(prevIndex, 1, {
-          peg: prev.peg,
           date: prev.date,
+          note: prev.note,
+          peg: prev.peg,
           unknown: prevUnknown,
           value: prev.value
         });
@@ -57,6 +63,7 @@ class PegStoreService {
       var unknown: number = null;
       this.pegs.splice(index, 0, {
         date: peg.date,
+        note: peg.note,
         peg: peg.peg,
         unknown: unknown,
         value: peg.value

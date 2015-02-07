@@ -9,9 +9,10 @@ class AppController {
   ];
 
   peg: {
-    peg: boolean;
-    index: number;
     date: string;
+    index: number;
+    note: string;
+    peg: boolean;
     value: number;
   };
 
@@ -42,9 +43,10 @@ class AppController {
 
   _reset(): void {
     this.peg = {
-      peg: true,
-      index: 0,
       date: moment().format('YYYY-MM-DD'),
+      index: 0,
+      note: null,
+      peg: true,
       value: 0
     };
   }

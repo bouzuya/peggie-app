@@ -35,6 +35,7 @@
                   <span class="peg-container"><input name="peg" ng-model="c.peg.peg" type="checkbox" /></span>
                   <span class="date-container"><input name="date" ng-model="c.peg.date" /></span>
                   <span class="value-container"><input name="value" ng-model="c.peg.value" type="number" /></span>
+                  <span class="note-container"><input name="note" ng-model="c.peg.note" /></span>
                   <span class="add-button-container"><button class="add-button" ng-class="{ 'add-peg-button': c.peg.peg, 'add-item-button': !c.peg.peg }" ng-click="c.click()"><span ng-bind="c.peg.peg ? 'peg' : 'item'"></span></button></span>
                   <span class="clear-button-container"><button class="clear-button" ng-click="c.clear()">clear</button></span>
                 </form>
