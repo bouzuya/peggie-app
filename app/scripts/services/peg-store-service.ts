@@ -20,7 +20,7 @@ class PegStoreService {
     var prevIndex = this._lastIndexOf(before, (i) => i.peg);
     var after = this.pegs.slice(index);
     var afterItems = this._takeWhile(after, (i) => !i.peg);
-    var nextIndex = this._indexOf(after, (i) => i.peg);
+    var nextIndex = index + this._indexOf(after, (i) => i.peg);
 
     if (peg.peg) {
       if (prevIndex >= 0) {
@@ -34,7 +34,7 @@ class PegStoreService {
           value: prev.value
         });
       }
-      var nextValue = nextIndex >= 0 ? after[nextIndex].value : 0;
+      var nextValue = nextIndex >= 0 ? this.pegs[nextIndex].value : 0;
       var unknown = nextIndex >= 0 ? nextValue - sum(afterItems) - value : 0;
       this.pegs.splice(index, 0, {
         peg: peg.peg,
@@ -46,7 +46,7 @@ class PegStoreService {
       if (prevIndex >= 0) {
         var prev = this.pegs[prevIndex];
         var prevItems = beforeItems.concat(afterItems);
-        var nextValue = nextIndex >= 0 ? after[nextIndex].value : 0;
+        var nextValue = nextIndex >= 0 ? this.pegs[nextIndex].value : 0;
         var prevUnknown = nextValue - sum(prevItems) - value - prev.value;
         this.pegs.splice(prevIndex, 1, {
           peg: prev.peg,
