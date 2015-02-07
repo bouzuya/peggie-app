@@ -85,10 +85,12 @@
   }
 }
 
-.peg-container {
+.peg-container,
+.item-container {
   @font-size: 12px;
 
   .peg {
+    padding: 0 16px;
     position: relative;
     &:before {
       font-size: 12px;
@@ -105,6 +107,7 @@
   }
 
   .item {
+    padding: 0 16px;
     position: relative;
     &:before {
       font-size: 12px;
@@ -119,6 +122,17 @@
       color: #000;
     }
   }
+}
+.pegs {
+  background-color: #000;
+}
+.peg-container {
+  padding-left: 8px;
+  border-top: 16px solid #fff;
+}
+.item-container {
+  margin-left: 8px;
+  background-color: #fff;
 }
 
 .peg {

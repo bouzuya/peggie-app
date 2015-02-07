@@ -25,7 +25,7 @@
       <div class="content-container">
         <div class="content">
           <ul class="pegs">
-            <li class="peg-container" ng-repeat="i in c.pegs">
+            <li ng-class="{ 'peg-container': i.peg, 'item-container': !i.peg }" ng-repeat="i in c.pegs">
               <pg-peg model="i"></pg-peg>
               <div class="peg-form-container" ng-class="{ 'has-form': c.peg.index == $index + 1 }">
                 <button class="add-button add-peg-button" ng-if="c.peg.index === 0" ng-click="c.formFor($index + 1, true)">Add as peg</button>
