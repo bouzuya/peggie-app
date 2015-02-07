@@ -17,7 +17,7 @@ class AppController {
   };
 
   pegStoreService: PegStoreService;
-  pegs: Array<{}>;
+  pegs: Array<{ date: string }>;
 
   constructor(
     pegStoreService: PegStoreService
@@ -30,6 +30,8 @@ class AppController {
   formFor(index: number, peg: boolean) {
     this.peg.index = index;
     this.peg.peg = peg;
+    var item = this.pegs[index - 1];
+    this.peg.date = item ? item.date : moment().format('YYYY-MM-DD');
   }
 
   clear(): void {

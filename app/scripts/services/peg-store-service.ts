@@ -71,7 +71,7 @@ class PegStoreService {
     }
   }
 
-  getAll(): Array<{}> {
+  getAll(): Array<{ date: string }> {
     return this.pegs;
   }
 
