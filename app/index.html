@@ -24,12 +24,20 @@
       <!-- content module -->
       <div class="content-container">
         <div class="content">
-          <pg-peg-form></pg-peg-form>
           <ul>
             <li ng-repeat="i in c.pegs">
-              <div class="peg-before" ng-click="c.formFor($index)"></div>
               <pg-peg model="i"></pg-peg>
-              <div class="peg-after" ng-click="c.formFor($index + 1)"></div>
+              <div class="peg-after">
+                <button ng-if="c.peg.index === 0" ng-click="c.formFor($index + 1, true)">Add as peg</button>
+                <button ng-if="c.peg.index === 0" ng-click="c.formFor($index + 1, false)">Add as item</button>
+                <form ng-if="c.peg.index == $index + 1" class="peg-form">
+                  <input name="index" ng-model="c.peg.index" type="number" style="display: none" />
+                  <input name="peg" ng-model="c.peg.peg" type="checkbox" style="display: none" />
+                  <input name="date" ng-model="c.peg.date" />
+                  <input name="value" ng-model="c.peg.value" type="number" />
+                  <button ng-click="c.click()"><span ng-bind="c.peg.peg ? 'peg' : 'item'"></button>
+                </form>
+              </div>
             </li>
           </ul>
         </div>
