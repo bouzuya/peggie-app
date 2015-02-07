@@ -28,6 +28,7 @@ gulp.task 'build', (done) ->
   run.apply run, [
     'typescript'
     'webpack'
+    'font'
     'less'
     'html'
     done
@@ -47,6 +48,11 @@ gulp.task 'default', ->
   run.apply(run, ['clean', 'build'])
 
 gulp.task 'deps', ['tsd']
+
+gulp.task 'font', ->
+  gulp
+    .src './bower_components/bootstrap/dist/fonts/*'
+    .pipe gulp.dest paths.distDir + '/fonts'
 
 gulp.task 'html', ->
   rev = require 'gulp-rev'
