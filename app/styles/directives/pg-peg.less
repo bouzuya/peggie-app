@@ -122,6 +122,46 @@
       color: #000;
     }
   }
+
+  .peg,
+  .item {
+    min-width: 300px;
+
+    .date {
+      display: inline-block;
+      width: 96px;
+      margin-right: 16px;
+    }
+
+    .value {
+      display: inline-block;
+      width: 64px;
+      margin-right: 16px;
+      text-align: right;
+    }
+
+    .unknown {
+      display: inline-block;
+      width: 64px;
+      margin-right: 16px;
+      text-align: right;
+    }
+
+    .total {
+      display: inline-block;
+      width: 64px;
+      margin-right: 16px;
+      text-align: right;
+
+      & + .note {
+        margin-left: 0;
+      }
+    }
+
+    .note {
+      margin-left: 80px;
+    }
+  }
 }
 .pegs {
   background-color: #000;
