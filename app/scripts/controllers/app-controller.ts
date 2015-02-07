@@ -1,6 +1,7 @@
 /// <reference path="../../../typings/angularjs/angular.d.ts" />
 /// <reference path="../../../typings/moment/moment.d.ts" />
 
+import Peg = require('../models/peg');
 import PegStoreService = require('../services/peg-store-service');
 
 class AppController {
@@ -8,16 +9,10 @@ class AppController {
     'PegStoreService'
   ];
 
-  peg: {
-    date: string;
-    index: number;
-    note: string;
-    peg: boolean;
-    value: number;
-  };
-
+  peg: Peg;
+  pegIndex: number;
   pegStoreService: PegStoreService;
-  pegs: Array<{ date: string }>;
+  pegs: Array<Peg>;
 
   constructor(
     pegStoreService: PegStoreService
@@ -28,7 +23,7 @@ class AppController {
   }
 
   formFor(index: number, peg: boolean) {
-    this.peg.index = index;
+    this.pegIndex = index;
     this.peg.peg = peg;
     var item = this.pegs[index - 1];
     this.peg.date = item ? item.date : moment().format('YYYY-MM-DD');
@@ -39,14 +34,14 @@ class AppController {
   }
 
   click(): void {
-    this.pegStoreService.insert(this.peg.index, this.peg);
+    this.pegStoreService.insert(this.pegIndex, this.peg);
     this._reset();
   }
 
   _reset(): void {
+    this.pegIndex = 0;
     this.peg = {
       date: moment().format('YYYY-MM-DD'),
-      index: 0,
       note: null,
       peg: true,
       value: 0

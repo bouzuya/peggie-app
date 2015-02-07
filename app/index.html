@@ -27,11 +27,11 @@
           <ul class="pegs">
             <li ng-class="{ 'peg-container': i.peg, 'item-container': !i.peg }" ng-repeat="i in c.pegs">
               <pg-peg model="i"></pg-peg>
-              <div class="peg-form-container" ng-class="{ 'has-form': c.peg.index == $index + 1 }">
-                <button class="add-button add-peg-button" ng-if="c.peg.index === 0" ng-click="c.formFor($index + 1, true)">Add as peg</button>
-                <button class="add-button add-item-button" ng-if="c.peg.index === 0" ng-click="c.formFor($index + 1, false)">Add as item</button>
-                <form class="peg-form" ng-if="c.peg.index == $index + 1">
-                  <span class="index-container"><input name="index" ng-model="c.peg.index" type="number" /></span>
+              <div class="peg-form-container" ng-class="{ 'has-form': c.pegIndex == $index + 1 }">
+                <button class="add-button add-peg-button" ng-if="c.pegIndex === 0" ng-click="c.formFor($index + 1, true)">Add as peg</button>
+                <button class="add-button add-item-button" ng-if="c.pegIndex === 0" ng-click="c.formFor($index + 1, false)">Add as item</button>
+                <form class="peg-form" ng-if="c.pegIndex == $index + 1">
+                  <span class="index-container"><input name="index" ng-model="c.pegIndex" type="number" /></span>
                   <span class="peg-container"><input name="peg" ng-model="c.peg.peg" type="checkbox" /></span>
                   <span class="date-container"><input name="date" ng-model="c.peg.date" /></span>
                   <span class="value-container"><input name="value" ng-model="c.peg.value" type="number" /></span>
