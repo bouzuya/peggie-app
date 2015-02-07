@@ -1,19 +1,74 @@
-.peg-after {
+.peg-form-container {
   background-color: #eee;
-  min-height: 16px;
+  min-height: 24px;
+  padding: 8px 16px;
+
+  .index-container {
+    display: none;
+  }
+
+  .peg-container {
+    display: none;
+  }
+
+  .add-button {
+    padding: 8px 16px;
+    height: 48px;
+    border-width: 0;
+    border-radius: 8px;
+
+    &.add-peg-button {
+      background-color: #000;
+      color: #fff;
+    }
+    &.add-item-button {
+      background-color: #fff;
+      color: #000;
+    }
+  }
+
+  .add-button-container {
+    .add-button {
+      padding: 8px 16px;
+      height: 48px;
+      border-width: 0;
+      border-radius: 8px;
+
+      &.add-peg-button {
+        background-color: #000;
+        color: #fff;
+      }
+      &.item-button {
+        background-color: #fff;
+        color: #000;
+      }
+    }
+  }
+
+  .clear-button-container {
+    .clear-button {
+      padding: 8px 16px;
+      height: 48px;
+      border-width: 0;
+      border-radius: 8px;
+    }
+  }
 
   button {
     display: none;
   }
 
-  &:hover {
-    button {
-      display: inline-block;
-    }
+  &.has-form button,
+  &:hover button {
+    display: inline-block;
   }
 }
 
-.peg {
+.peg,
+.item {
+  height: 64px;
+  line-height: 64px;
+
   .value {
     color: #c00;
   }
@@ -28,4 +83,45 @@
       content: '?';
     }
   }
+}
+
+.peg-container {
+  @font-size: 12px;
+
+  .peg {
+    position: relative;
+    &:before {
+      font-size: 12px;
+      height: 12px;
+      line-height: 12px;
+      content: 'peg';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: #000;
+      color: #fff;
+    }
+  }
+
+  .item {
+    position: relative;
+    &:before {
+      font-size: 12px;
+      height: 12px;
+      line-height: 12px;
+      content: 'item';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: #fff;
+      color: #000;
+    }
+  }
+}
+
+.peg {
+  background-color: #000;
+  color: #fff;
 }

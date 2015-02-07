@@ -24,19 +24,19 @@
       <!-- content module -->
       <div class="content-container">
         <div class="content">
-          <ul>
-            <li ng-repeat="i in c.pegs">
+          <ul class="pegs">
+            <li class="peg-container" ng-repeat="i in c.pegs">
               <pg-peg model="i"></pg-peg>
-              <div class="peg-after">
-                <button ng-if="c.peg.index === 0" ng-click="c.formFor($index + 1, true)">Add as peg</button>
-                <button ng-if="c.peg.index === 0" ng-click="c.formFor($index + 1, false)">Add as item</button>
-                <form ng-if="c.peg.index == $index + 1" class="peg-form">
-                  <input name="index" ng-model="c.peg.index" type="number" style="display: none" />
-                  <input name="peg" ng-model="c.peg.peg" type="checkbox" style="display: none" />
-                  <input name="date" ng-model="c.peg.date" />
-                  <input name="value" ng-model="c.peg.value" type="number" />
-                  <button ng-click="c.click()"><span ng-bind="c.peg.peg ? 'peg' : 'item'"></button>
-                  <button ng-click="c.clear()">clear</button>
+              <div class="peg-form-container" ng-class="{ 'has-form': c.peg.index == $index + 1 }">
+                <button class="add-button add-peg-button" ng-if="c.peg.index === 0" ng-click="c.formFor($index + 1, true)">Add as peg</button>
+                <button class="add-button add-item-button" ng-if="c.peg.index === 0" ng-click="c.formFor($index + 1, false)">Add as item</button>
+                <form class="peg-form" ng-if="c.peg.index == $index + 1">
+                  <span class="index-container"><input name="index" ng-model="c.peg.index" type="number" /></span>
+                  <span class="peg-container"><input name="peg" ng-model="c.peg.peg" type="checkbox" /></span>
+                  <span class="date-container"><input name="date" ng-model="c.peg.date" /></span>
+                  <span class="value-container"><input name="value" ng-model="c.peg.value" type="number" /></span>
+                  <span class="add-button-container"><button class="add-button" ng-class="{ 'add-peg-button': c.peg.peg, 'add-item-button': !c.peg.peg }" ng-click="c.click()"><span ng-bind="c.peg.peg ? 'peg' : 'item'"></span></button></span>
+                  <span class="clear-button-container"><button class="clear-button" ng-click="c.clear()">clear</button></span>
                 </form>
               </div>
             </li>

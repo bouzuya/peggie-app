@@ -64,3 +64,21 @@
 }
 
 @import "./directives/pg-peg";
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  &:nth-child(even) {
+    border-left: 8px solid #fff;
+  }
+  &:nth-child(odd) {
+    border-left: 8px solid #ccc;
+  }
+}
