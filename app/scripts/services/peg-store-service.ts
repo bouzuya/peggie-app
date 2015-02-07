@@ -7,11 +7,12 @@ class PegStoreService {
 
   constructor() {
     this.pegs = [
-      { peg: false, date: '2015-01-09', value: 750, note: 'カレー' },
-      { peg: false, date: '2015-01-07', value: 800, note: 'きつねうどんていしょく' },
-      { peg: false, date: '2015-01-06', value: 700, note: 'ぎょうざていしょく' },
-      { peg: true, date: '2015-01-05', value: 3500, unknown: 5000, note: null },
-      { peg: false, date: '2015-01-02', value: 1500, note: 'はつもうで' },
+      { peg: false, date: '2015-01-09', value: -750, note: 'カレー' },
+      { peg: false, date: '2015-01-07', value: -800, note: 'きつねうどんていしょく' },
+      { peg: false, date: '2015-01-06', value: -700, note: 'ぎょうざていしょく' },
+      { peg: true, date: '2015-01-05', value: 3500, unknown: -5100, note: null },
+      { peg: false, date: '2015-01-03', value: 100, note: '交差点でひろった' },
+      { peg: false, date: '2015-01-02', value: -1500, note: 'はつもうで' },
       { peg: true, date: '2015-01-01', value: 10000, unknown: 0, note: 'おとしだま直後' }
     ];
   }

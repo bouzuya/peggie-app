@@ -69,18 +69,25 @@
   height: 64px;
   line-height: 64px;
 
-  .value {
-    color: #c00;
-  }
-
   .total {
     text-decoration: underline;
   }
 
   .unknown {
-    color: #990;
+    &.minus {
+      color: #f30;
+    }
+    &.plus {
+      color: #09f;
+    }
+    &.zero {
+      color: #000;
+    }
+  }
+
+  .unknown {
     &:before {
-      content: '?';
+      content: '? ';
     }
   }
 }
@@ -135,21 +142,21 @@
 
     .value {
       display: inline-block;
-      width: 64px;
+      width: 80px;
       margin-right: 16px;
       text-align: right;
     }
 
     .unknown {
       display: inline-block;
-      width: 64px;
+      width: 80px;
       margin-right: 16px;
       text-align: right;
     }
 
     .total {
       display: inline-block;
-      width: 64px;
+      width: 80px;
       margin-right: 16px;
       text-align: right;
 
@@ -159,7 +166,7 @@
     }
 
     .note {
-      margin-left: 84px;
+      margin-left: 100px;
     }
   }
 }
