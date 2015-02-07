@@ -5,6 +5,7 @@ import PegStoreService = require('../services/peg-store-service');
 
 class PgPegFormController {
   static $inject = [
+    '$rootScope', // FIXME
     'PegStoreService'
   ];
 
@@ -18,10 +19,15 @@ class PgPegFormController {
   pegStoreService: PegStoreService;
 
   constructor(
+    $rootScope: ng.IRootScopeService,
     pegStoreService: PegStoreService
   ) {
     this.pegStoreService = pegStoreService;
     this._reset();
+
+    $rootScope.$on('peg-form-service:set-index', (_, index: number) => {
+      this.peg.index = index;
+    });
   }
 
   click(): void {
