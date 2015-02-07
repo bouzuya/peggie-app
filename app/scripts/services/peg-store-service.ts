@@ -1,5 +1,6 @@
 /// <reference path="../../../typings/moment/moment.d.ts" />
 
+import moment = require('moment');
 import Peg = require('../models/peg');
 
 class PegStoreService {
@@ -47,7 +48,7 @@ class PegStoreService {
       if (prevIndex >= 0) {
         var prev = this.pegs[prevIndex];
         var prevItems = beforeItems;
-        var prevUnknown = peg.value - sum(prevItems) - prev.value;
+        var prevUnknown = prev.value - peg.value + sum(prevItems);
         this.pegs.splice(prevIndex, 1, {
           date: prev.date,
           note: prev.note,
@@ -57,7 +58,7 @@ class PegStoreService {
         });
       }
       var nextValue = nextIndex >= 0 ? this.pegs[nextIndex].value : 0;
-      var unknown = nextIndex >= 0 ? nextValue - sum(afterItems) - peg.value : 0;
+      var unknown = nextIndex >= 0 ? peg.value - nextValue - sum(afterItems) : 0;
       this.pegs.splice(index, 0, {
         date: peg.date,
         note: peg.note,
@@ -70,7 +71,7 @@ class PegStoreService {
         var prev = this.pegs[prevIndex];
         var prevItems = beforeItems.concat(afterItems);
         var nextValue = nextIndex >= 0 ? this.pegs[nextIndex].value : 0;
-        var prevUnknown = nextValue - sum(prevItems) - peg.value - prev.value;
+        var prevUnknown = prev.value - nextValue - sum(prevItems) - peg.value;
         this.pegs.splice(prevIndex, 1, {
           date: prev.date,
           note: prev.note,
