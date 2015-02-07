@@ -1,3 +1,5 @@
+/// <reference path="../../../typings/moment/moment.d.ts" />
+
 import Peg = require('../models/peg');
 
 class PegStoreService {
@@ -18,6 +20,19 @@ class PegStoreService {
     var sum = (array: Array<{ value: number }>): number => {
       return array.reduce(((r, i) => r + i.value), 0);
     };
+
+    if (index < 0 || this.pegs.length < index) return;
+
+    var date = moment(peg.date);
+    var dateIsValid = (
+      date.isSame(this.pegs[index - 1].date, 'days') ||
+      date.isBefore(this.pegs[index - 1].date, 'days')
+    ) && (
+      index === this.pegs.length ||
+      date.isSame(this.pegs[index].date, 'days') ||
+      date.isAfter(this.pegs[index].date, 'days')
+    );
+    if (!dateIsValid) return;
 
     var before = this.pegs.slice(0, index);
     var beforeItems = this._takeRightWhile(before, (i) => !i.peg);
