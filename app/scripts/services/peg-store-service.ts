@@ -25,6 +25,7 @@ class PegStoreService {
 
     var date = moment(peg.date);
     var dateIsValid = (
+      index === 0 ||
       date.isSame(this.pegs[index - 1].date, 'days') ||
       date.isBefore(this.pegs[index - 1].date, 'days')
     ) && (

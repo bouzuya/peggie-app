@@ -39,7 +39,7 @@ class AppController {
   }
 
   _reset(): void {
-    this.pegIndex = 0;
+    this.pegIndex = -1;
     this.peg = {
       date: moment().format('YYYY-MM-DD'),
       note: null,
