@@ -1,5 +1,7 @@
+import Peg = require('../models/peg');
+
 class PegStoreService {
-  pegs: Array<{ date: string; note: string; peg: boolean; value: number }>;
+  pegs: Array<Peg>;
 
   constructor() {
     this.pegs = [
@@ -12,7 +14,7 @@ class PegStoreService {
     ];
   }
 
-  insert(index: number, peg: { date: string; note: string; peg: boolean; value: number }): void {
+  insert(index: number, peg: Peg): void {
     var sum = (array: Array<{ value: number }>): number => {
       return array.reduce(((r, i) => r + i.value), 0);
     };
@@ -71,7 +73,7 @@ class PegStoreService {
     }
   }
 
-  getAll(): Array<{ date: string }> {
+  getAll(): Array<Peg> {
     return this.pegs;
   }
 
