@@ -10,7 +10,7 @@ class PgPegFormController {
 
   peg: {
     peg: boolean;
-    index: string;
+    index: number;
     date: string;
     value: string;
   };
@@ -25,15 +25,14 @@ class PgPegFormController {
   }
 
   click(): void {
-    var index = parseInt(this.peg.index, 10);
-    this.pegStoreService.insert(index, this.peg);
+    this.pegStoreService.insert(this.peg.index, this.peg);
     this._reset();
   }
 
   _reset(): void {
     this.peg = {
       peg: true,
-      index: '0',
+      index: 0,
       date: moment().format('YYYY-MM-DD'),
       value: '0'
     };
