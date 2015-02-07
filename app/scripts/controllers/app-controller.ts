@@ -31,6 +31,10 @@ class AppController {
     this.peg.peg = peg;
   }
 
+  clear(): void {
+    this._reset();
+  }
+
   click(): void {
     this.pegStoreService.insert(this.peg.index, this.peg);
     this._reset();
