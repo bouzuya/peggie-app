@@ -1,6 +1,5 @@
 /// <reference path="../../../typings/moment/moment.d.ts" />
 
-import moment = require('moment');
 import Peg = require('../models/peg');
 
 class PegStoreService {
