@@ -27,7 +27,9 @@
           <pg-peg-form></pg-peg-form>
           <ul>
             <li ng-repeat="i in c.pegs">
+              <div class="peg-before" ng-click="c.formFor($index)"></div>
               <pg-peg model="i"></pg-peg>
+              <div class="peg-after" ng-click="c.formFor($index + 1)"></div>
             </li>
           </ul>
         </div>
