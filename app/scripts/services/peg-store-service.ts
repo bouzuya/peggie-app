@@ -91,6 +91,37 @@ class PegStoreService {
     }
   }
 
+  remove(index: number): void {
+    var sum = (array: Array<{ value: number }>): number => {
+      return array.reduce(((r, i) => r + i.value), 0);
+    };
+
+    if (index < 0 || this.pegs.length < index) return;
+
+    var before = this.pegs.slice(0, index);
+    var beforeItems = this._takeRightWhile(before, (i) => !i.peg);
+    var prevIndex = this._lastIndexOf(before, (i) => i.peg);
+    var after = this.pegs.slice(index);
+    var afterItems = this._takeWhile(after, (i) => !i.peg);
+    var nextIndex = index + this._indexOf(after, (i) => i.peg);
+
+    var peg = this.pegs[index];
+    if (prevIndex >= 0) {
+      var prev = this.pegs[prevIndex];
+      var prevItems = beforeItems.concat(afterItems);
+      var nextValue = nextIndex >= 0 ? this.pegs[nextIndex].value : 0;
+      var prevUnknown = prev.value - nextValue - sum(prevItems) + peg.value;
+      this.pegs.splice(prevIndex, 1, {
+        date: prev.date,
+        note: prev.note,
+        peg: prev.peg,
+        unknown: prevUnknown,
+        value: prev.value
+      });
+    }
+    this.pegs.splice(index, 1);
+  }
+
   getAll(): Array<Peg> {
     return this.pegs;
   }

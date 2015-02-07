@@ -42,6 +42,7 @@
             <li ng-class="{ 'peg-container': i.peg, 'item-container': !i.peg }" ng-repeat="i in c.pegs">
               <pg-peg model="i"></pg-peg>
               <div class="peg-form-container" ng-class="{ 'has-form': c.pegIndex == $index + 1 }">
+                <button class="remove-button" ng-if="c.pegIndex === -1" ng-click="c.remove($index)">Remove this peg/item</button>
                 <button class="add-button add-peg-button" ng-if="c.pegIndex === -1" ng-click="c.formFor($index + 1, true)">Add as peg</button>
                 <button class="add-button add-item-button" ng-if="c.pegIndex === -1" ng-click="c.formFor($index + 1, false)">Add as item</button>
                 <form class="peg-form" ng-if="c.pegIndex == $index + 1">

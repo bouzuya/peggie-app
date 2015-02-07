@@ -38,6 +38,10 @@ class AppController {
     this._reset();
   }
 
+  remove(index: number): void {
+    this.pegStoreService.remove(index);
+  }
+
   _reset(): void {
     this.pegIndex = -1;
     this.peg = {
