@@ -20,7 +20,7 @@ class PegStoreService {
     var prevIndex = this._lastIndexOf(before, (i) => i.peg);
     var after = this.pegs.slice(index);
     var afterItems = this._takeWhile(after, (i) => !i.peg);
-    var next = this._first(after, (i) => i.peg);
+    var nextIndex = this._indexOf(after, (i) => i.peg);
 
     if (peg.peg) {
       if (prevIndex >= 0) {
@@ -34,7 +34,8 @@ class PegStoreService {
           value: prev.value
         });
       }
-      var unknown = next.value - sum(afterItems) - value;
+      var nextValue = nextIndex >= 0 ? after[nextIndex].value : 0;
+      var unknown = nextIndex >= 0 ? nextValue - sum(afterItems) - value : 0;
       this.pegs.splice(index, 0, {
         peg: peg.peg,
         date: peg.date,
@@ -45,7 +46,8 @@ class PegStoreService {
       if (prevIndex >= 0) {
         var prev = this.pegs[prevIndex];
         var prevItems = beforeItems.concat(afterItems);
-        var prevUnknown = next.value - sum(prevItems) - value - prev.value;
+        var nextValue = nextIndex >= 0 ? after[nextIndex].value : 0;
+        var prevUnknown = nextValue - sum(prevItems) - value - prev.value;
         this.pegs.splice(prevIndex, 1, {
           peg: prev.peg,
           date: prev.date,
@@ -67,12 +69,12 @@ class PegStoreService {
     return this.pegs;
   }
 
-  private _first<T>(array: Array<T>, pred: (item: T) => boolean): T {
-    var initial: { end: boolean; item: T } = { end: false, item: null };
-    return array.reduce((r, i) => {
+  private _indexOf<T>(array: Array<T>, pred: (item: T) => boolean): number {
+    var initial: { end: boolean; index: number } = { end: false, index: -1 };
+    return array.reduce((r, i, index) => {
       if (r.end || !pred(i)) return r;
-      return { end: true, item: i };
-    }, initial).item;
+      return { end: true, index: index };
+    }, initial).index;
   }
 
   private _lastIndexOf<T>(array: Array<T>, pred: (item: T) => boolean): number {
