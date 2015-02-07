@@ -12,7 +12,7 @@ class PgPegFormController {
     peg: boolean;
     index: number;
     date: string;
-    value: string;
+    value: number;
   };
 
   pegStoreService: PegStoreService;
@@ -34,7 +34,7 @@ class PgPegFormController {
       peg: true,
       index: 0,
       date: moment().format('YYYY-MM-DD'),
-      value: '0'
+      value: 0
     };
   }
 }

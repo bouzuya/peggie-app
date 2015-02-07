@@ -9,12 +9,11 @@ class PegStoreService {
     ];
   }
 
-  insert(index: number, peg: { date: string; peg: boolean; value: string }): void {
+  insert(index: number, peg: { date: string; peg: boolean; value: number }): void {
     var sum = (array: Array<{ value: number }>): number => {
       return array.reduce(((r, i) => r + i.value), 0);
     };
 
-    var value = parseInt(peg.value, 10);
     var before = this.pegs.slice(0, index);
     var beforeItems = this._takeRightWhile(before, (i) => !i.peg);
     var prevIndex = this._lastIndexOf(before, (i) => i.peg);
@@ -26,7 +25,7 @@ class PegStoreService {
       if (prevIndex >= 0) {
         var prev = this.pegs[prevIndex];
         var prevItems = beforeItems;
-        var prevUnknown = value - sum(prevItems) - prev.value;
+        var prevUnknown = peg.value - sum(prevItems) - prev.value;
         this.pegs.splice(prevIndex, 1, {
           peg: prev.peg,
           date: prev.date,
@@ -35,19 +34,19 @@ class PegStoreService {
         });
       }
       var nextValue = nextIndex >= 0 ? this.pegs[nextIndex].value : 0;
-      var unknown = nextIndex >= 0 ? nextValue - sum(afterItems) - value : 0;
+      var unknown = nextIndex >= 0 ? nextValue - sum(afterItems) - peg.value : 0;
       this.pegs.splice(index, 0, {
         peg: peg.peg,
         date: peg.date,
         unknown: unknown,
-        value: value
+        value: peg.value
       });
     } else {
       if (prevIndex >= 0) {
         var prev = this.pegs[prevIndex];
         var prevItems = beforeItems.concat(afterItems);
         var nextValue = nextIndex >= 0 ? this.pegs[nextIndex].value : 0;
-        var prevUnknown = nextValue - sum(prevItems) - value - prev.value;
+        var prevUnknown = nextValue - sum(prevItems) - peg.value - prev.value;
         this.pegs.splice(prevIndex, 1, {
           peg: prev.peg,
           date: prev.date,
@@ -60,7 +59,7 @@ class PegStoreService {
         date: peg.date,
         peg: peg.peg,
         unknown: unknown,
-        value: value
+        value: peg.value
       });
     }
   }
