@@ -52,7 +52,7 @@
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
-    "prestart": "bower install && tsd reinstall && gulp build",
+    "prestart": "gulp deps && gulp build",
     "start": "node server.js",
     "test": "gulp test",
     "watch": "gulp watch"
