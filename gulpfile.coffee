@@ -76,7 +76,13 @@ gulp.task 'html', ->
 gulp.task 'karma', (done) ->
   karma = require 'gulp-karma'
   gulp
-    .src paths.compiledTestFiles
+    .src [
+      # <script>
+      './bower_components/moment/moment.js'
+      './bower_components/angular/angular.js'
+      './bower_components/angular-ui-router/release/angular-ui-router.min.js'
+      paths.compiledTestFiles
+    ]
     .pipe karma(
       configFile: 'karma.conf.js'
       aciton: 'run'
@@ -181,7 +187,6 @@ gulp.task 'webpack', ->
       filename: 'main.js'
     resolve:
       extensions: ['', '.js']
-    devtool: 'eval'
   gulp
     .src paths.compiledApp
     .pipe webpack options
