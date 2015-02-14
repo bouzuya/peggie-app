@@ -16,6 +16,7 @@ paths =
   compiledTestFiles: './.tmp/test/**/*.js'
   compiledTestDir: './.tmp/test'
   coverageDir: './coverage'
+  tempDir: './.tmp'
 
 typescriptProject = typescript.createProject
   declarationFiles: true
@@ -41,6 +42,7 @@ gulp.task 'clean', (done) ->
     paths.compiledAppDir
     paths.compiledTestDir
     paths.distDir
+    paths.tempDir
   ], done
 
 gulp.task 'default', ->
