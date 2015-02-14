@@ -32,17 +32,15 @@ class PegStoreService {
     );
     if (!dateIsValid) return;
 
-    var before = this.pegs.slice(0, index);
-    var beforeItems = this._takeRightWhile(before, (i) => !i.peg);
     var prev = this._prevPeg(index);
     var after = this.pegs.slice(index);
     var afterItems = this._takeWhile(after, (i) => !i.peg);
     var next = this._nextPeg(index);
 
     if (peg.peg) {
-      this._insertPeg(prev, beforeItems, peg, next, afterItems, index);
+      this._insertPeg(prev, peg, next, afterItems, index);
     } else {
-      this._insertItem(prev, beforeItems, peg, next, afterItems, index);
+      this._insertItem(prev, peg, next, afterItems, index);
     }
   }
 
@@ -81,10 +79,9 @@ class PegStoreService {
     return this.pegs;
   }
 
-  private _insertPeg(prev: { index: number; peg: Peg }, beforeItems: Array<Peg>, peg: Peg, next: { index: number; peg: Peg }, afterItems: Array<Peg>, index: number) {
+  private _insertPeg(prev: { index: number; items: Array<Peg>; peg: Peg }, peg: Peg, next: { index: number; peg: Peg }, afterItems: Array<Peg>, index: number) {
     if (prev.peg !== null) {
-      var prevItems = beforeItems;
-      var prevUnknown = prev.peg.value + this._sumValue(prevItems) - peg.value;
+      var prevUnknown = prev.peg.value + this._sumValue(prev.items) - peg.value;
       this.pegs.splice(prev.index, 1, {
         date: prev.peg.date,
         note: prev.peg.note,
@@ -104,11 +101,10 @@ class PegStoreService {
     });
   }
 
-  private _insertItem(prev: { index: number; peg: Peg }, beforeItems: Array<Peg>, peg: Peg, next: { index: number; peg: Peg }, afterItems: Array<Peg>, index: number) {
+  private _insertItem(prev: { index: number; items: Array<Peg>; peg: Peg }, peg: Peg, next: { index: number; peg: Peg }, afterItems: Array<Peg>, index: number) {
     if (prev.peg !== null) {
-      var prevItems = beforeItems.concat(afterItems);
       var nextValue = next.index >= 0 ? next.peg.value : 0;
-      var prevUnknown = prev.peg.value - this._sumValue(prevItems) - nextValue - peg.value;
+      var prevUnknown = prev.peg.value - this._sumValue(prev.items.concat(afterItems)) - nextValue - peg.value;
       this.pegs.splice(prev.index, 1, {
         date: prev.peg.date,
         note: prev.peg.note,
@@ -135,12 +131,13 @@ class PegStoreService {
     return { index: index, peg: items[index] };
   }
 
-  private _prevPeg(index: number): { index: number; peg: Peg } {
+  private _prevPeg(index: number): { index: number; items: Array<Peg>; peg: Peg } {
     var items = this.pegs;
     var before = items.slice(0, index);
     var index = this._lastIndexOf(before, (i) => i.peg);
-    if (index < 0) return { index: null, peg: null };
-    return { index: index, peg: items[index] };
+    var beforeItems = this._takeRightWhile(before, (i) => !i.peg);
+    if (index < 0) return { index: null, items: beforeItems, peg: null };
+    return { index: index, items: beforeItems, peg: items[index] };
   }
 
   private _sumValue(array: Array<{ value: number }>): number {
