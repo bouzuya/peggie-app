@@ -2,9 +2,7 @@ module.exports = function(config) {
   config.set({
     frameworks: ['mocha'],
 
-    files: [
-      './.tmp/test/**/*.js'
-    ],
+    files: [], // use gulp.src (gulp-karma)
 
     autoWatch: false,
 
