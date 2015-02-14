@@ -46,27 +46,7 @@ class PegStoreService {
     if (peg.peg) {
       this._insertPeg(prevIndex, beforeItems, peg, sum, nextIndex, afterItems, index);
     } else {
-      if (prevIndex >= 0) {
-        var prev = this.pegs[prevIndex];
-        var prevItems = beforeItems.concat(afterItems);
-        var nextValue = nextIndex >= 0 ? this.pegs[nextIndex].value : 0;
-        var prevUnknown = prev.value - nextValue - sum(prevItems) - peg.value;
-        this.pegs.splice(prevIndex, 1, {
-          date: prev.date,
-          note: prev.note,
-          peg: prev.peg,
-          unknown: prevUnknown,
-          value: prev.value
-        });
-      }
-      var unknown: number = null;
-      this.pegs.splice(index, 0, {
-        date: peg.date,
-        note: peg.note,
-        peg: peg.peg,
-        unknown: unknown,
-        value: peg.value
-      });
+      this._insertItem(prevIndex, beforeItems, peg, sum, nextIndex, afterItems, index);
     }
   }
 
@@ -120,6 +100,30 @@ class PegStoreService {
     }
     var nextValue = nextIndex >= 0 ? this.pegs[nextIndex].value : 0;
     var unknown = nextIndex >= 0 ? peg.value - nextValue - sum(afterItems) : 0;
+    this.pegs.splice(index, 0, {
+      date: peg.date,
+      note: peg.note,
+      peg: peg.peg,
+      unknown: unknown,
+      value: peg.value
+    });
+  }
+
+  private _insertItem(prevIndex: number, beforeItems: Array<Peg>, peg: Peg, sum: (items: Array<Peg>) => number, nextIndex: number, afterItems: Array<Peg>, index: number) {
+    if (prevIndex >= 0) {
+      var prev = this.pegs[prevIndex];
+      var prevItems = beforeItems.concat(afterItems);
+      var nextValue = nextIndex >= 0 ? this.pegs[nextIndex].value : 0;
+      var prevUnknown = prev.value - nextValue - sum(prevItems) - peg.value;
+      this.pegs.splice(prevIndex, 1, {
+        date: prev.date,
+        note: prev.note,
+        peg: prev.peg,
+        unknown: prevUnknown,
+        value: prev.value
+      });
+    }
+    var unknown: number = null;
     this.pegs.splice(index, 0, {
       date: peg.date,
       note: peg.note,
