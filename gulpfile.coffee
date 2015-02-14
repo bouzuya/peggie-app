@@ -24,6 +24,10 @@ typescriptProject = typescript.createProject
   target: 'ES5'
   module: 'commonjs'
 
+gulp.task 'bower', ->
+  bower = require 'bower'
+  bower.commands.install()
+
 gulp.task 'build', (done) ->
   run = require 'run-sequence'
   run.apply run, [
@@ -49,7 +53,7 @@ gulp.task 'default', ->
   run = require 'run-sequence'
   run.apply(run, ['clean', 'build'])
 
-gulp.task 'deps', ['tsd']
+gulp.task 'deps', ['bower', 'tsd']
 
 gulp.task 'font', ->
   gulp
