@@ -36,6 +36,9 @@
     "run-sequence": "^1.0.2",
     "tsd": "^0.5.7"
   },
+  "engines": {
+    "node": "0.10.x"
+  },
   "homepage": "https://github.com/bouzuya/peggie-app",
   "keywords": [
     "peggie"
@@ -47,13 +50,11 @@
     "url": "https://github.com/bouzuya/peggie-app"
   },
   "scripts": {
+    "build": "gulp build",
     "clean": "gulp clean",
     "prestart": "bower install && tsd reinstall && gulp build",
     "start": "node server.js",
     "test": "gulp test",
     "watch": "gulp watch"
-  },
-  "engines": {
-    "node": "0.10.x"
   }
 }
