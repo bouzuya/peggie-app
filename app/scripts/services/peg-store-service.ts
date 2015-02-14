@@ -44,27 +44,7 @@ class PegStoreService {
     var nextIndex = index + this._indexOf(after, (i) => i.peg);
 
     if (peg.peg) {
-      if (prevIndex >= 0) {
-        var prev = this.pegs[prevIndex];
-        var prevItems = beforeItems;
-        var prevUnknown = prev.value - peg.value + sum(prevItems);
-        this.pegs.splice(prevIndex, 1, {
-          date: prev.date,
-          note: prev.note,
-          peg: prev.peg,
-          unknown: prevUnknown,
-          value: prev.value
-        });
-      }
-      var nextValue = nextIndex >= 0 ? this.pegs[nextIndex].value : 0;
-      var unknown = nextIndex >= 0 ? peg.value - nextValue - sum(afterItems) : 0;
-      this.pegs.splice(index, 0, {
-        date: peg.date,
-        note: peg.note,
-        peg: peg.peg,
-        unknown: unknown,
-        value: peg.value
-      });
+      this._insertPeg(prevIndex, beforeItems, peg, sum, nextIndex, afterItems, index);
     } else {
       if (prevIndex >= 0) {
         var prev = this.pegs[prevIndex];
@@ -123,6 +103,30 @@ class PegStoreService {
 
   getAll(): Array<Peg> {
     return this.pegs;
+  }
+
+  private _insertPeg(prevIndex: number, beforeItems: Array<Peg>, peg: Peg, sum: (items: Array<Peg>) => number, nextIndex: number, afterItems: Array<Peg>, index: number) {
+    if (prevIndex >= 0) {
+      var prev = this.pegs[prevIndex];
+      var prevItems = beforeItems;
+      var prevUnknown = prev.value - peg.value + sum(prevItems);
+      this.pegs.splice(prevIndex, 1, {
+        date: prev.date,
+        note: prev.note,
+        peg: prev.peg,
+        unknown: prevUnknown,
+        value: prev.value
+      });
+    }
+    var nextValue = nextIndex >= 0 ? this.pegs[nextIndex].value : 0;
+    var unknown = nextIndex >= 0 ? peg.value - nextValue - sum(afterItems) : 0;
+    this.pegs.splice(index, 0, {
+      date: peg.date,
+      note: peg.note,
+      peg: peg.peg,
+      unknown: unknown,
+      value: peg.value
+    });
   }
 
   private _indexOf<T>(array: Array<T>, pred: (item: T) => boolean): number {
