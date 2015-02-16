@@ -1,25 +1,25 @@
 /// <reference path="../../../typings/moment/moment.d.ts" />
 
 import Peg = require('../models/peg');
+import PegType = require('../models/peg-type');
 
 class PegStoreService {
   pegs: Array<Peg>;
 
   constructor() {
     this.pegs = [
-      { peg: false, date: '2015-01-09', value: -750, note: 'カレー' },
-      { peg: false, date: '2015-01-07', value: -800, note: 'きつねうどんていしょく' },
-      { peg: false, date: '2015-01-06', value: -700, note: 'ぎょうざていしょく' },
-      { peg: true, date: '2015-01-05', value: 3500, unknown: -5100, note: null },
-      { peg: false, date: '2015-01-03', value: 100, note: '交差点でひろった' },
-      { peg: false, date: '2015-01-02', value: -1500, note: 'はつもうで' },
-      { peg: true, date: '2015-01-01', value: 10000, unknown: 0, note: 'おとしだま直後' }
+      { type: PegType.Item, date: '2015-01-09', value: -750, note: 'カレー' },
+      { type: PegType.Item, date: '2015-01-07', value: -800, note: 'きつねうどんていしょく' },
+      { type: PegType.Item, date: '2015-01-06', value: -700, note: 'ぎょうざていしょく' },
+      { type: PegType.Peg, date: '2015-01-05', value: 3500, unknown: -5100, note: null },
+      { type: PegType.Item, date: '2015-01-03', value: 100, note: '交差点でひろった' },
+      { type: PegType.Item, date: '2015-01-02', value: -1500, note: 'はつもうで' },
+      { type: PegType.Peg, date: '2015-01-01', value: 10000, unknown: 0, note: 'おとしだま直後' }
     ];
   }
 
   insert(index: number, peg: Peg): void {
     if (index < 0 || this.pegs.length < index) return;
-
     var date = moment(peg.date);
     var dateIsValid = (
       index === 0 ||
@@ -32,7 +32,7 @@ class PegStoreService {
     );
     if (!dateIsValid) return;
 
-    if (peg.peg) {
+    if (peg.type === PegType.Peg) {
       this._insertPeg(index, peg);
     } else {
       this._insertItem(index, peg);
@@ -47,11 +47,11 @@ class PegStoreService {
     if (index < 0 || this.pegs.length < index) return;
 
     var before = this.pegs.slice(0, index);
-    var beforeItems = this._takeRightWhile(before, (i) => !i.peg);
-    var prevIndex = this._lastIndexOf(before, (i) => i.peg);
+    var beforeItems = this._takeRightWhile(before, (i) => !(i.type === PegType.Peg));
+    var prevIndex = this._lastIndexOf(before, (i) => i.type === PegType.Peg);
     var after = this.pegs.slice(index);
-    var afterItems = this._takeWhile(after, (i) => !i.peg);
-    var nextIndex = index + this._indexOf(after, (i) => i.peg);
+    var afterItems = this._takeWhile(after, (i) => !(i.type === PegType.Peg));
+    var nextIndex = index + this._indexOf(after, (i) => i.type === PegType.Peg);
 
     var peg = this.pegs[index];
     if (prevIndex >= 0) {
@@ -62,7 +62,7 @@ class PegStoreService {
       this.pegs.splice(prevIndex, 1, {
         date: prev.date,
         note: prev.note,
-        peg: prev.peg,
+        type: prev.type,
         unknown: prevUnknown,
         value: prev.value
       });
@@ -83,7 +83,7 @@ class PegStoreService {
       this.pegs.splice(prev.index, 1, {
         date: prev.peg.date,
         note: prev.peg.note,
-        peg: prev.peg.peg,
+        type: prev.peg.type,
         unknown: prevUnknown,
         value: prev.peg.value
       });
@@ -93,7 +93,7 @@ class PegStoreService {
     this.pegs.splice(index, 0, {
       date: peg.date,
       note: peg.note,
-      peg: peg.peg,
+      type: peg.type,
       unknown: unknown,
       value: peg.value
     });
@@ -109,7 +109,7 @@ class PegStoreService {
       this.pegs.splice(prev.index, 1, {
         date: prev.peg.date,
         note: prev.peg.note,
-        peg: prev.peg.peg,
+        type: prev.peg.type,
         unknown: prevUnknown,
         value: prev.peg.value
       });
@@ -118,7 +118,7 @@ class PegStoreService {
     this.pegs.splice(index, 0, {
       date: peg.date,
       note: peg.note,
-      peg: peg.peg,
+      type: peg.type,
       unknown: unknown,
       value: peg.value
     });
@@ -127,8 +127,8 @@ class PegStoreService {
   private _nextPeg(index: number): { index: number; items: Array<Peg>; itemsValue: number; peg: Peg } {
     var items = this.pegs;
     var after = items.slice(index);
-    var index = index + this._indexOf(after, (i) => i.peg);
-    var afterItems = this._takeWhile(after, (i) => !i.peg);
+    var index = index + this._indexOf(after, (i) => i.type === PegType.Peg);
+    var afterItems = this._takeWhile(after, (i) => !(i.type === PegType.Peg));
     var value = this._sumValue(afterItems);
     if (index < 0) return { index: null, items: afterItems, itemsValue: value, peg: null };
     return { index: index, items: afterItems, itemsValue: value, peg: items[index] };
@@ -137,8 +137,8 @@ class PegStoreService {
   private _prevPeg(index: number): { index: number; items: Array<Peg>; itemsValue: number; peg: Peg } {
     var items = this.pegs;
     var before = items.slice(0, index);
-    var index = this._lastIndexOf(before, (i) => i.peg);
-    var beforeItems = this._takeRightWhile(before, (i) => !i.peg);
+    var index = this._lastIndexOf(before, (i) => i.type === PegType.Peg);
+    var beforeItems = this._takeRightWhile(before, (i) => !(i.type === PegType.Peg));
     var value = this._sumValue(beforeItems);
     if (index < 0) return { index: null, items: beforeItems, itemsValue: value, peg: null };
     return { index: index, items: beforeItems, itemsValue: value, peg: items[index] };

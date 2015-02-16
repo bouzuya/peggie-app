@@ -3,6 +3,7 @@
 import assert = require('power-assert');
 
 import PegStoreService = require('../../app/scripts/services/peg-store-service');
+import PegType = require('../../app/scripts/models/peg-type');
 
 describe('PegStoreService', function() {
   beforeEach(function() {
@@ -16,26 +17,26 @@ describe('PegStoreService', function() {
       this.peg1 = {
         date: '2015-01-01',
         note: 'peg1',
-        peg: true,
+        type: PegType.Peg,
         value: 10000
       };
       this.peg2 = {
         date: '2015-01-02',
         note: 'peg2',
-        peg: true,
+        type: PegType.Peg,
         value: 3000
       };
       this.peg3 = {
         date: '2015-01-02',
         note: 'peg3',
-        peg: true,
+        type: PegType.Peg,
         unknown: -3000,
         value: 4000
       };
       this.item1 = {
         date: '2015-01-01',
         note: 'item1',
-        peg: false,
+        type: PegType.Item,
         value: -1000
       };
     });
@@ -49,7 +50,7 @@ describe('PegStoreService', function() {
             {
               date: '2015-01-01',
               note: 'peg1',
-              peg: true,
+              type: PegType.Peg,
               unknown: 0, // is 0
               value: 10000
             }
@@ -65,7 +66,7 @@ describe('PegStoreService', function() {
             {
               date: '2015-01-01',
               note: 'item1',
-              peg: false,
+              type: PegType.Item,
               unknown: null,
               value: -1000
             }
@@ -103,14 +104,14 @@ describe('PegStoreService', function() {
             {
               date: '2015-01-02',
               note: 'peg2',
-              peg: true,
+              type: PegType.Peg,
               unknown: -7000,
               value: 3000
             },
             {
               date: '2015-01-01',
               note: 'peg1',
-              peg: true,
+              type: PegType.Peg,
               unknown: 0,
               value: 10000
             }
@@ -126,7 +127,7 @@ describe('PegStoreService', function() {
             {
               date: '2015-01-01',
               note: 'peg1',
-              peg: true,
+              type: PegType.Peg,
               unknown: 0,
               value: 10000
             }
@@ -149,14 +150,14 @@ describe('PegStoreService', function() {
             {
               date: '2015-01-02',
               note: 'peg2',
-              peg: true,
+              type: PegType.Peg,
               unknown: -7000,
               value: 3000
             },
             {
               date: '2015-01-01',
               note: 'peg1',
-              peg: true,
+              type: PegType.Peg,
               unknown: 0,
               value: 10000
             }
@@ -172,21 +173,21 @@ describe('PegStoreService', function() {
             {
               date: '2015-01-02',
               note: 'peg2',
-              peg: true,
+              type: PegType.Peg,
               unknown: -6000,
               value: 3000
             },
             {
               date: '2015-01-01',
               note: 'item1',
-              peg: false,
+              type: PegType.Item,
               unknown: null,
               value: -1000
             },
             {
               date: '2015-01-01',
               note: 'peg1',
-              peg: true,
+              type: PegType.Peg,
               unknown: 0,
               value: 10000
             }
@@ -210,28 +211,28 @@ describe('PegStoreService', function() {
             {
               date: '2015-01-02',
               note: 'peg2',
-              peg: true,
+              type: PegType.Peg,
               unknown: -1000,
               value: 3000
             },
             {
               date: '2015-01-02',
               note: 'peg3',
-              peg: true,
+              type: PegType.Peg,
               unknown: -5000,
               value: 4000
             },
             {
               date: '2015-01-01',
               note: 'item1',
-              peg: false,
+              type: PegType.Item,
               unknown: null,
               value: -1000
             },
             {
               date: '2015-01-01',
               note: 'peg1',
-              peg: true,
+              type: PegType.Peg,
               unknown: 0,
               value: 10000
             }
@@ -247,28 +248,28 @@ describe('PegStoreService', function() {
             {
               date: '2015-01-02',
               note: 'peg2',
-              peg: true,
+              type: PegType.Peg,
               unknown: -5000,
               value: 3000
             },
             {
               date: '2015-01-01',
               note: 'item1',
-              peg: false,
+              type: PegType.Item,
               unknown: null,
               value: -1000
             },
             {
               date: '2015-01-01',
               note: 'item1',
-              peg: false,
+              type: PegType.Item,
               unknown: null,
               value: -1000
             },
             {
               date: '2015-01-01',
               note: 'peg1',
-              peg: true,
+              type: PegType.Peg,
               unknown: 0,
               value: 10000
             }
