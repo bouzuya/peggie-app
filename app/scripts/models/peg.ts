@@ -1,7 +1,9 @@
+import PegType = require('./peg-type');
+
 class Peg {
   date: string;
   note: string;
-  peg: boolean;
+  type: PegType;
   value: number;
 }
 
