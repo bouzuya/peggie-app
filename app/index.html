@@ -29,17 +29,17 @@
             <button class="add-button add-item-button" ng-if="c.pegIndex === -1" ng-click="c.formFor(0, false)"><span class="glyphicon glyphicon-plus-sign"></span> item</button>
             <form class="peg-form" ng-if="c.pegIndex === 0">
               <span class="index-container"><input name="index" ng-model="c.pegIndex" type="number" /></span>
-              <span class="peg-container"><input name="peg" ng-model="c.peg.peg" type="checkbox" /></span>
+              <span class="peg-container"><input name="type" ng-model="c.peg.type" ng-true-value="Peg" ng-false-value="Item" type="checkbox" /></span>
               <span class="date-container"><input name="date" ng-model="c.peg.date" /></span>
               <span class="value-container"><input name="value" ng-model="c.peg.value" type="number" /></span>
               <span class="note-container"><input name="note" ng-model="c.peg.note" /></span>
-              <span class="add-button-container"><button class="add-button" ng-class="{ 'add-peg-button': c.peg.peg, 'add-item-button': !c.peg.peg }" ng-click="c.click()"><span ng-bind="c.peg.peg ? 'peg' : 'item'"></span></button></span>
+              <span class="add-button-container"><button class="add-button" ng-class="{ 'add-peg-button': (c.peg.type === PegType.Peg), 'add-item-button': !(c.peg.type === PegType.Peg)}" ng-click="c.click()"><span ng-bind="(c.peg.type === PegType.Peg) ? 'peg' : 'item'"></span></button></span>
               <span class="clear-button-container"><button class="clear-button" ng-click="c.clear()">clear</button></span>
             </form>
           </div>
 
           <ul class="pegs">
-            <li ng-class="{ 'peg-container': i.peg, 'item-container': !i.peg }" ng-repeat="i in c.pegs">
+            <li ng-class="{ 'peg-container': (i.type === PegType.Peg), 'item-container': !(i.type === PegType.Peg) }" ng-repeat="i in c.pegs">
               <pg-peg model="i"></pg-peg>
               <div class="peg-form-container" ng-class="{ 'has-form': c.pegIndex == $index + 1 }">
                 <button class="remove-button" ng-if="c.pegIndex === -1" ng-click="c.remove($index)"><span class="glyphicon glyphicon-trash"></span></button>
@@ -47,11 +47,11 @@
                 <button class="add-button add-item-button" ng-if="c.pegIndex === -1" ng-click="c.formFor($index + 1, false)"><span class="glyphicon glyphicon-plus-sign"></span> item</button>
                 <form class="peg-form" ng-if="c.pegIndex == $index + 1">
                   <span class="index-container"><input name="index" ng-model="c.pegIndex" type="number" /></span>
-                  <span class="peg-container"><input name="peg" ng-model="c.peg.peg" type="checkbox" /></span>
+                  <span class="peg-container"><input name="type" ng-model="c.peg.type" ng-true-value="Peg" ng-false-value="Item" type="checkbox" /></span>
                   <span class="date-container"><input name="date" ng-model="c.peg.date" /></span>
                   <span class="value-container"><input name="value" ng-model="c.peg.value" type="number" /></span>
                   <span class="note-container"><input name="note" ng-model="c.peg.note" /></span>
-                  <span class="add-button-container"><button class="add-button" ng-class="{ 'add-peg-button': c.peg.peg, 'add-item-button': !c.peg.peg }" ng-click="c.click()"><span ng-bind="c.peg.peg ? 'peg' : 'item'"></span></button></span>
+                  <span class="add-button-container"><button class="add-button" ng-class="{ 'add-peg-button': (c.peg.type === PegType.Peg), 'add-item-button': !(c.peg.type === PegType.Peg) }" ng-click="c.click()"><span ng-bind="(c.peg.type === PegType.Peg) ? 'peg' : 'item'"></span></button></span>
                   <span class="clear-button-container"><button class="clear-button" ng-click="c.clear()">clear</button></span>
                 </form>
               </div>

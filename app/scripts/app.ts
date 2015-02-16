@@ -5,6 +5,7 @@ import DetailController = require('./controllers/detail-controller');
 import HubotScriptService = require('./services/hubot-script-service');
 import PegStoreService = require('./services/peg-store-service');
 import PgPeg = require('./directives/pg-peg');
+import PegType = require('./models/peg-type');
 
 angular
 .module('app', [
@@ -45,5 +46,11 @@ angular
         }
       }
     });
+  }
+])
+.run([
+  '$rootScope',
+  function($rootScope) {
+    $rootScope.PegType = PegType;
   }
 ]);

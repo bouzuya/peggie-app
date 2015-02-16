@@ -2,6 +2,7 @@
 /// <reference path="../../../typings/moment/moment.d.ts" />
 
 import Peg = require('../models/peg');
+import PegType = require('../models/peg-type');
 import PegStoreService = require('../services/peg-store-service');
 
 class AppController {
@@ -24,7 +25,7 @@ class AppController {
 
   formFor(index: number, peg: boolean) {
     this.pegIndex = index;
-    this.peg.peg = peg;
+    this.peg.type = peg ? PegType.Peg : PegType.Item;
     var item = this.pegs[index - 1];
     this.peg.date = item ? item.date : moment().format('YYYY-MM-DD');
   }
@@ -47,7 +48,7 @@ class AppController {
     this.peg = {
       date: moment().format('YYYY-MM-DD'),
       note: null,
-      peg: true,
+      type: PegType.Peg,
       value: 0
     };
   }
