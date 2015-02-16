@@ -1,7 +1,7 @@
-<div ng-class="{ peg: model.peg, item: !model.peg }">
+<div ng-class="{ peg: (model.type === PegType.Peg), item: (model.type === PegType.Item) }">
   <span class="date" ng-bind="model.date"></span>
-  <span class="value" ng-bind="model.value | number:0"  ng-class="{ minus: (model.value < 0), plus: (model.value > 0), zero: (model.value === 0) }" ng-if="!model.peg"></span>
-  <span class="unknown" ng-bind="model.unknown | number:0" ng-class="{ minus: (model.unknown < 0), plus: (model.unknown > 0), zero: (model.unknown === 0) }" ng-if="model.peg"></span>
-  <span class="total" ng-bind="model.value | number:0" ng-if="model.peg"></span>
+  <span class="value" ng-bind="model.value | number:0"  ng-class="{ minus: (model.value < 0), plus: (model.value > 0), zero: (model.value === 0) }" ng-if="!(model.type === PegType.Peg)"></span>
+  <span class="unknown" ng-bind="model.unknown | number:0" ng-class="{ minus: (model.unknown < 0), plus: (model.unknown > 0), zero: (model.unknown === 0) }" ng-if="(model.type === PegType.Peg)"></span>
+  <span class="total" ng-bind="model.value | number:0" ng-if="(model.type === PegType.Peg)"></span>
   <span class="note" ng-bind="model.note" ng-if="model.note"></span>
 </div>
