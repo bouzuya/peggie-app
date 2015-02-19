@@ -7,7 +7,8 @@ class PegStoreService {
   pegs: Array<Peg>;
 
   constructor() {
-    this.pegs = [
+    this.pegs = [];
+    [
       { type: PegType.Item, date: '2015-01-09', value: -750, note: 'カレー' },
       { type: PegType.Item, date: '2015-01-07', value: -800, note: 'きつねうどんていしょく' },
       { type: PegType.Item, date: '2015-01-06', value: -700, note: 'ぎょうざていしょく' },
@@ -15,7 +16,9 @@ class PegStoreService {
       { type: PegType.Item, date: '2015-01-03', value: 100, note: '交差点でひろった' },
       { type: PegType.Item, date: '2015-01-02', value: -1500, note: 'はつもうで' },
       { type: PegType.Peg, date: '2015-01-01', value: 10000, unknown: 0, note: 'おとしだま直後' }
-    ];
+    ].forEach((i, index) => {
+      this.insert(index, i);
+    });
   }
 
   insert(index: number, peg: Peg): void {
