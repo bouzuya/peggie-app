@@ -16,8 +16,8 @@ class PegStoreService {
       { type: PegType.Item, date: '2015-01-03', value: 100, note: '交差点でひろった' },
       { type: PegType.Item, date: '2015-01-02', value: -1500, note: 'はつもうで' },
       { type: PegType.Peg, date: '2015-01-01', value: 10000, unknown: 0, note: 'おとしだま直後' }
-    ].forEach((i, index) => {
-      this.insert(index, i);
+    ].forEach((i) => {
+      this.insert(this._indexFor(i), i);
     });
   }
 
@@ -75,6 +75,10 @@ class PegStoreService {
 
   getAll(): Array<Peg> {
     return this.pegs;
+  }
+
+  private _indexFor(peg: Peg): number {
+    return this.pegs.filter((i) => i.date > peg.date).length;
   }
 
   private _insertPeg(index: number, peg: Peg) {
