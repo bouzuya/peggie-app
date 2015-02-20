@@ -10,6 +10,55 @@ describe('PegStoreService', function() {
     this.service = new PegStoreService();
   });
 
+  describe('#getMonth', function() {
+    beforeEach(function() {
+      // clear dummy data
+      this.service.pegs = [];
+      this.item1 = {
+        date: '2015-01-01',
+        note: 'item1',
+        type: PegType.Item,
+        unknown: null,
+        value: -1000
+      };
+      this.item2 = {
+        date: '2015-01-02',
+        note: 'item2',
+        type: PegType.Item,
+        unknown: null,
+        value: -2000
+      };
+      this.item3 = {
+        date: '2015-02-01',
+        note: 'item3',
+        type: PegType.Item,
+        unknown: null,
+        value: -3000
+      };
+      this.item4 = {
+        date: '2015-02-01',
+        note: 'item4',
+        type: PegType.Item,
+        unknown: null,
+        value: -4000
+      };
+      [this.item4, this.item3, this.item2, this.item1].forEach((i, index) => {
+        this.service.insert(index, i);
+      });
+    });
+
+    it('works', function() {
+      assert.deepEqual(
+        this.service.getMonth('2015-01'),
+        [this.item2, this.item1]
+      );
+      assert.deepEqual(
+        this.service.getMonth('2015-02'),
+        [this.item4, this.item3]
+      );
+    });
+  });
+
   describe('#insert', function() {
     beforeEach(function() {
       // clear dummy data

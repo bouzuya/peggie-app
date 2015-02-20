@@ -9,6 +9,7 @@ class PegStoreService {
   constructor() {
     this.pegs = [];
     [
+      { type: PegType.Item, date: '2015-02-03', value: -1200, note: '1000円カレー' },
       { type: PegType.Item, date: '2015-01-09', value: -750, note: 'カレー' },
       { type: PegType.Item, date: '2015-01-07', value: -800, note: 'きつねうどんていしょく' },
       { type: PegType.Item, date: '2015-01-06', value: -700, note: 'ぎょうざていしょく' },
@@ -75,6 +76,10 @@ class PegStoreService {
 
   getAll(): Array<Peg> {
     return this.pegs;
+  }
+
+  getMonth(month: string): Array<Peg> {
+    return this.pegs.filter(i => i.date.indexOf(month) === 0);
   }
 
   private _indexFor(peg: Peg): number {
