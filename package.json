@@ -36,9 +36,6 @@
     "run-sequence": "^1.0.2",
     "tsd": "^0.5.7"
   },
-  "engines": {
-    "node": "0.10.x"
-  },
   "homepage": "https://github.com/bouzuya/peggie-app",
   "keywords": [
     "peggie"
